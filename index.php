@@ -24,8 +24,8 @@ Implementare funzionalita’ di filtraggio aggiuntive basate, ad esempio, su nom
 </head>
 
 <body>
-
-    <?php
+    <main>
+        <?php
 
     // data
     $classi = [
@@ -269,27 +269,36 @@ Implementare funzionalita’ di filtraggio aggiuntive basate, ad esempio, su nom
 
     ?>
 
-    <!-- stampiano in pagina tutte le classi con i dati degli studenti -->
-    <?php foreach($classi as $classe => $studenti) { ?>
+        <!-- stampiano in pagina tutte le classi con i dati degli studenti -->
+        <div class="container my-5">
+            <?php foreach($classi as $classe => $studenti) { ?>
+            <div class="row justify-content-center border border-dark rounded mb-5 bg-primary-subtle">
+                <div class="col-12 text-center">
+                    <h2> <?php echo($classe); ?></h2>
+                </div>
 
-    <h2> <?php echo($classe); ?></h2>
-    <?php foreach($studenti as $datiStudente) { ?>
-    <ul>
-        <li>
-            <?= 'id: '.$datiStudente['id']; ?>
-            <?= 'nome: '.$datiStudente['nome']; ?>
-            <?= 'cognome: '.$datiStudente['cognome']; ?>
-            <?= 'anni: '.$datiStudente['anni']; ?>
-            <?= 'voto medio: '.$datiStudente['voto_medio']; ?>
-            <?= 'linguaggio preferito: '.$datiStudente['linguaggio_preferito']; ?>
-        </li>
-    </ul>
+                <?php foreach($studenti as $datiStudente) { ?>
+                <div class="col-4">
+                    <div class="card mb-2 bg-info shadow-sm">
+                        <div class="card-body text-center">
+                            <h4 class="card-title ">
+                                <?= $datiStudente['nome'].' '.$datiStudente['cognome']; ?></h4>
+                            <?= 'id: '.$datiStudente['id']; ?><br>
+                            <?= 'anni: '.$datiStudente['anni']; ?><br>
+                            <?= 'voto medio: '.$datiStudente['voto_medio']; ?><br>
+                            <?= 'linguaggio preferito: '.$datiStudente['linguaggio_preferito']; ?>
+                        </div>
+                    </div>
+                </div>
 
-    <?php } ?>
-    <?php } ?>
+                <?php } ?>
+            </div>
+            <?php } ?>
 
-    <!-- filtriamo il nostro array e mostrare gli studenti con voto medio sufficiente.-->
+        </div>
+        <!-- filtriamo il nostro array e mostrare gli studenti con voto medio sufficiente.-->
 
+        <!-- 
     <?php 
     foreach($classi as $classe => $studenti) {
         foreach($studenti as $datiStudente) {
@@ -300,6 +309,7 @@ Implementare funzionalita’ di filtraggio aggiuntive basate, ad esempio, su nom
     }
     ?>
 
+    //stampo l'array filtrato
 
     <?php foreach($studentiMigliori as $classe => $studenti) { ?>
     <h2> <?php echo($classe); ?></h2>
@@ -316,8 +326,10 @@ Implementare funzionalita’ di filtraggio aggiuntive basate, ad esempio, su nom
     </ul>
     <?php } ?>
     <?php } ?>
+    -->
 
-
+        <!-- aggiungiamo un form e filtriamo gli studenti inserendo un voto medio massimo  -->
+    </main>
 </body>
 
 </html>

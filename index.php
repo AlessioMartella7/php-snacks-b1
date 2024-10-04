@@ -9,8 +9,14 @@ $userName = $_GET['name'];
 $userAge = $_GET['age'];
 $userEmail = $_GET['email'];
 
-var_dump($userName)
+var_dump($userName,$userAge,$userEmail);
 
+if(str_contains($userEmail,'@') && is_numeric($userAge))
+{
+var_dump('accesso eseguito');
+} else {
+    var_dump('accesso negato');
+}
 
  ?>
 

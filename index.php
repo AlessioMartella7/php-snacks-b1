@@ -32,32 +32,52 @@ Implementare funzionalita’ di filtraggio aggiuntive basate, ad esempio, su nom
             $studentiMigliori= [];
          ?>
 
-        <!-- stampiano in pagina tutte le classi con i dati degli studenti -->
         <div class="container my-5">
-            <?php foreach($classi as $classe => $studenti) { ?>
-            <div class="row justify-content-center border border-dark rounded mb-5 bg-primary-subtle">
-                <div class="col-12 text-center">
-                    <h2> <?php echo($classe); ?></h2>
-                </div>
+            <section id="display-classes">
+                <!-- stampiano in pagina tutte le classi con i dati degli studenti -->
+                <?php foreach($classi as $classe => $studenti) { ?>
+                <div class="row justify-content-center border border-dark rounded mb-5 bg-primary-subtle">
+                    <div class="col-12 text-center">
+                        <h2> <?php echo($classe); ?></h2>
+                    </div>
 
-                <?php foreach($studenti as $datiStudente) { ?>
-                <div class="col-4">
-                    <div class="card mb-2 bg-info shadow-sm">
-                        <div class="card-body text-center">
-                            <h4 class="card-title ">
-                                <?= $datiStudente['nome'].' '.$datiStudente['cognome']; ?></h4>
-                            <?= 'id: '.$datiStudente['id']; ?><br>
-                            <?= 'anni: '.$datiStudente['anni']; ?><br>
-                            <?= 'voto medio: '.$datiStudente['voto_medio']; ?><br>
-                            <?= 'linguaggio preferito: '.$datiStudente['linguaggio_preferito']; ?>
+                    <?php foreach($studenti as $datiStudente) { ?>
+                    <div class="col-4">
+                        <div class="card mb-2 bg-info shadow-sm">
+                            <div class="card-body text-center">
+                                <h4 class="card-title bg-primary rounded">
+                                    <?= $datiStudente['nome'].' '.$datiStudente['cognome']; ?></h4>
+                                <div class="card-text fw-bold">
+                                    <p><?= 'id: '.$datiStudente['id']; ?></p>
+                                    <p><?= 'anni: '.$datiStudente['anni']; ?></p>
+                                    <p><?= 'voto medio: '.$datiStudente['voto_medio']; ?></p>
+                                    <p><?= 'linguaggio preferito: '.$datiStudente['linguaggio_preferito']; ?></p>
+                                </div>
+                            </div>
                         </div>
+                    </div>
+
+                    <?php } ?>
+                </div>
+                <?php } ?>
+
+            </section>
+
+            <section id="form">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <form action="index.php" method="get">
+                            <label class="fw-bold fs-4" for="voteSearch">Ricerca per voto medio</label>
+                            <input class="rounded mx-2" type="text" placeholder="Cerca" id="voteSearch"
+                                name="voteSearch">
+                            <button class="btn btn-primary" type="submit">Cerca</button>
+                            <button class="btn btn-danger ms-2" type="reset">Resetta</button>
+                        </form>
                     </div>
                 </div>
 
-                <?php } ?>
-            </div>
-            <?php } ?>
 
+            </section>
         </div>
         <!-- filtriamo il nostro array e mostrare gli studenti con voto medio sufficiente.-->
 

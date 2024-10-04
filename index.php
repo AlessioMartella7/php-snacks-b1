@@ -46,13 +46,17 @@ $db = [
     <div class="container">
         <div class="row">
             <?php foreach($db as $person => $elements) {?>
-            <p><?= $person ?></p>
+
+            <p class="fs-2 fw-bold"><?= $person ?></p>
+
             <?php foreach($elements as $personalData => $value) { ?>
+
             <ul>
-                <li>
+                <li class=" fw-medium fs-5">
                     <?php echo $value['name'], $value['lastname'];?>
                 </li>
             </ul>
+
             <?php } ?>
             <?php } ?>
         </div>

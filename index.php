@@ -265,7 +265,7 @@ Implementare funzionalita’ di filtraggio aggiuntive basate, ad esempio, su nom
             ],
         ],
     ];
-    $studentiMigliori = [];
+    $studentiMigliori= [];
 
     ?>
 
@@ -273,7 +273,7 @@ Implementare funzionalita’ di filtraggio aggiuntive basate, ad esempio, su nom
     <?php foreach($classi as $classe => $studenti) { ?>
 
     <h2> <?php echo($classe); ?></h2>
-    <?php foreach($studenti as $studente => $datiStudente) { ?>
+    <?php foreach($studenti as $datiStudente) { ?>
     <ul>
         <li>
             <?= 'id: '.$datiStudente['id']; ?>
@@ -294,29 +294,28 @@ Implementare funzionalita’ di filtraggio aggiuntive basate, ad esempio, su nom
     foreach($classi as $classe => $studenti) {
         foreach($studenti as $datiStudente) {
             if($datiStudente['voto_medio'] >= 6) {
-                $studentiMigliori[] = $datiStudente;
+                $studentiMigliori[$classe] []= $datiStudente;
             }
         }
     }
     ?>
 
 
-    <!-- 
-
-"Classe 1A" => [
-            [
-                "id" => 1,
-                "nome" => "Marco",
-                "cognome" => "Rossi",
-                "anni" => 23,
-                "voto_medio" => 8.5,
-                "linguaggio_preferito" => "PHP",
-                "immagine" => "https://source.unsplash.com/random/200x200?person",
-            ], -->
-
-
-
-
+    <?php foreach($studentiMigliori as $classe => $studenti) { ?>
+    <h2> <?php echo($classe); ?></h2>
+    <?php foreach($studenti as $studente) { ?>
+    <ul>
+        <li>
+            <?= 'id: '.$studente['id']; ?>
+            <?= 'nome: '.$studente['nome']; ?>
+            <?= 'cognome: '.$studente['cognome']; ?>
+            <?= 'anni: '.$studente['anni']; ?>
+            <?= 'voto medio: '.$studente['voto_medio']; ?>
+            <?= 'linguaggio preferito: '.$studente['linguaggio_preferito']; ?>
+        </li>
+    </ul>
+    <?php } ?>
+    <?php } ?>
 
 
 </body>

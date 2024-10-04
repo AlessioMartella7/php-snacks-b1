@@ -25,6 +25,7 @@ $db = [
     ]
 ];
 
+
 ?>
 
 
@@ -42,6 +43,20 @@ $db = [
 
 <body>
 
+    <div class="container">
+        <div class="row">
+            <?php foreach($db as $person => $elements) {?>
+            <p><?= $person ?></p>
+            <?php foreach($elements as $personalData => $value) { ?>
+            <ul>
+                <li>
+                    <?php echo $value['name'], $value['lastname'];?>
+                </li>
+            </ul>
+            <?php } ?>
+            <?php } ?>
+        </div>
+    </div>
 
 </body>
 

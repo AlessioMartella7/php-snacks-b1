@@ -29,13 +29,38 @@ Implementare funzionalita’ di filtraggio aggiuntive basate, ad esempio, su nom
         <?php
             // data
             include_once __DIR__."/data/classesList.php";
+            include_once __DIR__."/data/searchInput.php";
             $studentiMigliori= [];
+            
          ?>
+
+        <!-- filtriamo in base ad un voto massimo -->
+        <?php 
+
+            // assegno un valore di base all'array sulla quale iterare per la visualizzazione degli studenti
+            $studentiVisualizzati = $classi;
+
+            if(isset($searchVote) && is_numeric($searchVote) && ($searchVote >= 1) && ($searchVote <= 10) ) {
+            $filteredByVote= [];
+            foreach($classi as $classe => $studenti) { 
+             foreach($studenti as $datiStudente){ 
+                if($datiStudente['voto_medio'] <= $searchVote) {
+                    $filteredByVote [] = $datiStudente;
+                    
+                    }
+                }
+              }
+            }
+            // se è stato richiesto un filtro per il voto sostituisco il valore dell'array su cui vado ad iterare con quello degli studenti filtrati
+            if (!empty($filteredByVote)) {
+                $studentiVisualizzati =  ['Studenti filtrati' => $filteredByVote];
+            }
+            ?>
 
         <div class="container my-5">
             <section id="display-classes">
                 <!-- stampiano in pagina tutte le classi con i dati degli studenti -->
-                <?php foreach($classi as $classe => $studenti) { ?>
+                <?php foreach($studentiVisualizzati as $classe => $studenti) { ?>
                 <div class="row justify-content-center border border-dark rounded mb-5 bg-primary-subtle">
                     <div class="col-12 text-center">
                         <h2> <?php echo($classe); ?></h2>
@@ -79,6 +104,8 @@ Implementare funzionalita’ di filtraggio aggiuntive basate, ad esempio, su nom
 
             </section>
         </div>
+
+
         <!-- filtriamo il nostro array e mostrare gli studenti con voto medio sufficiente.-->
 
         <!-- 

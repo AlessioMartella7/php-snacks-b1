@@ -31,31 +31,54 @@ Implementare funzionalita’ di filtraggio aggiuntive basate, ad esempio, su nom
             include_once __DIR__."/data/classesList.php";
             include_once __DIR__."/data/searchInput.php";
             $studentiMigliori= [];
+            // assegno un valore di base all'array sulla quale iterare per la visualizzazione degli studenti
+            $studentiVisualizzati = $classi;
             
          ?>
 
         <!-- filtriamo in base ad un voto massimo -->
         <?php 
 
-            // assegno un valore di base all'array sulla quale iterare per la visualizzazione degli studenti
-            $studentiVisualizzati = $classi;
 
             if(isset($searchVote) && is_numeric($searchVote) && ($searchVote >= 1) && ($searchVote <= 10) ) {
-            $filteredByVote= [];
-            foreach($classi as $classe => $studenti) { 
-             foreach($studenti as $datiStudente){ 
-                if($datiStudente['voto_medio'] <= $searchVote) {
-                    $filteredByVote [] = $datiStudente;
-                    
+                $filteredByVote= [];
+                foreach($classi as $classe => $studenti) { 
+                    foreach($studenti as $datiStudente){ 
+
+                        if($datiStudente['voto_medio'] <= $searchVote) {
+                        $filteredByVote [] = $datiStudente;
+                        
+                        }
                     }
                 }
-              }
             }
             // se è stato richiesto un filtro per il voto sostituisco il valore dell'array su cui vado ad iterare con quello degli studenti filtrati
             if (!empty($filteredByVote)) {
-                $studentiVisualizzati =  ['Studenti filtrati' => $filteredByVote];
+                $studentiVisualizzati =  ['Studenti filtrati per voto' => $filteredByVote];
             }
             ?>
+
+        <!-- filtro per linguaggio preferito -->
+        <?php
+
+            if(isset($languageSearch) ) {
+                $filteredByLanguage= [];
+                foreach($studentiVisualizzati as $classe => $studenti) { 
+                    foreach($studenti as $datiStudente){ 
+                        
+                        if($datiStudente['linguaggio_preferito'] === $languageSearch) {
+                            $filteredByLanguage [] = $datiStudente;
+                        }
+                    }   
+                }
+            }
+            // se è stato richiesto un filtro per il linguaggio sostituisco il valore dell'array su cui vado ad iterare con quello degli studenti filtrati
+            if (!empty($filteredByLanguage)) {
+                $studentiVisualizzati =  ['Studenti filtrati per linguaggio' => $filteredByLanguage];
+            }
+            
+            ?>
+
 
         <div class="container my-5">
             <section id="display-classes">
@@ -89,14 +112,25 @@ Implementare funzionalita’ di filtraggio aggiuntive basate, ad esempio, su nom
             </section>
 
             <section id="form">
-                <div class="row">
+                <div class="row bg-success-subtle rounded p-3">
                     <div class="col-12 text-center">
                         <form action="index.php" method="get">
+
+                            <!-- input ricerca voto -->
                             <label class="fw-bold fs-4" for="voteSearch">Ricerca per voto medio</label>
-                            <input class="rounded mx-2" type="text" placeholder="Cerca" id="voteSearch"
+                            <input class="rounded mx-2" type="text" placeholder="Inserisci voto" id="voteSearch"
                                 name="voteSearch">
+
+                            <!-- input ricerca linguaggio preferito -->
+                            <label class="fw-bold fs-4" for="langSearch">Linguaggio preferito</label>
+                            <input class="rounded mx-2" type="text" placeholder="Inserisci un linguaggio"
+                                id="langSearch" name="language">
+
+                            <!-- bottoni -->
                             <button class="btn btn-primary" type="submit">Cerca</button>
                             <button class="btn btn-danger ms-2" type="reset">Resetta</button>
+                            <a href="./index.php"><button class="btn btn-success ms-2"
+                                    type="button">Ricarica</button></a>
                         </form>
                     </div>
                 </div>

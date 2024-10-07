@@ -1,3 +1,8 @@
+<?php
+include_once __DIR__."/functions/functions.php";
+$textToCheck = $_GET['textToCheck'];
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 

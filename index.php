@@ -1,6 +1,6 @@
 <?php
 include_once __DIR__."/functions/functions.php";
-$textToCheck = $_GET['textToCheck'];
+$textToCheck = strtolower($_GET['textToCheck']);
 
 ?>
 <!DOCTYPE html>
@@ -23,7 +23,7 @@ $textToCheck = $_GET['textToCheck'];
         </form>
 
         <?php
-        
+        isPalindrome($textToCheck);
         ?>
     </main>
 </body>
